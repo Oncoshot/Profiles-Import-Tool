@@ -1,7 +1,7 @@
 # Profiles-Import-Tool
 This tool is an example how to import profiles to Oncoshot via its API
 
-This tool is written in node.js. The API documentation is available on https://api.oncodevel.com/swagger/index.html
+This tool is written in node.js. The API documentation is available on https://api.oncoshot.com/swagger/index.html
 
 ### Getting Started
 
@@ -14,7 +14,8 @@ To run the tool, take the following steps
     AUTH0_CLIENT_SECRET= // Secret Key provided to you
     ONCOSHOT_ORGANISATION= // Your organisation name on Oncoshot
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
-4. Run the commannd, ```npm run upload``` to start the tool
+4. Run the commannd, ```npm run upload <Location of File>``` to start the tool (eg. ```npm run upload json_data/valid.json```)
+5. Logs will be printed to the console and saved in a .txt file in the logs folder
 
 ### Function Details
 1. src/auth.js

@@ -2,7 +2,7 @@
   "name": "profiles-import-tool",
   "version": "1.0.0",
   "description": "This tool is an example how to import profiles to Oncoshot via its API",
-  "main": "index.js",
+  "main": "src/upload.js",
   "scripts": {
     "upload": "env-cmd -f config/auth.env node src/upload.js"
   },
@@ -17,9 +17,7 @@
   },
   "homepage": "https://github.com/Oncoshot/Profiles-Import-Tool#readme",
   "dependencies": {
-    "csv-parser": "^3.0.0",
     "env-cmd": "^10.1.0",
-    "prompt": "^1.1.0",
     "request": "^2.88.2"
   }
 }
