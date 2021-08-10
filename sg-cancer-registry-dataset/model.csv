@@ -8,16 +8,16 @@ Female,Cervix,Stage II,50-59 years,163.14360975609756
 Female,Cervix,Stage III,30-39 years,24.257756097560975
 Female,Cervix,Stage III,40-49 years,40.999024390243896
 Female,Cervix,Stage III,50-59 years,46.80721951219512
-Female,Cervix,Stage IV,30-39 years,35.79785365853659
-Female,Cervix,Stage IV,40-49 years,60.50341463414634
-Female,Cervix,Stage IV,50-59 years,69.07473170731707
-Female,Colon & rectum,Stage I,0-29 years,3.7199999999999998
-Female,Colon & rectum,Stage I,30-39 years,16.368000000000002
-Female,Colon & rectum,Stage I,40-49 years,59.148
-Female,Colon & rectum,Stage I,50-59 years,177.44400000000002
-Female,Colon & rectum,Stage I,60-69 years,254.44799999999998
-Female,Colon & rectum,Stage I,70-79 years,226.92
-Female,Colon & rectum,Stage I,80+ years,212.226
+Female,Cervix,Stage IV,30-39 years,35.79785365853658
+Female,Cervix,Stage IV,40-49 years,60.50341463414633
+Female,Cervix,Stage IV,50-59 years,69.07473170731706
+Female,Colon & rectum,Stage I,0-29 years,3.7199999999999993
+Female,Colon & rectum,Stage I,30-39 years,16.368
+Female,Colon & rectum,Stage I,40-49 years,59.147999999999996
+Female,Colon & rectum,Stage I,50-59 years,177.444
+Female,Colon & rectum,Stage I,60-69 years,254.44799999999995
+Female,Colon & rectum,Stage I,70-79 years,226.91999999999996
+Female,Colon & rectum,Stage I,80+ years,212.22599999999997
 Female,Colon & rectum,Stage II,0-29 years,4.959999999999999
 Female,Colon & rectum,Stage II,30-39 years,21.824
 Female,Colon & rectum,Stage II,40-49 years,78.864
@@ -25,13 +25,13 @@ Female,Colon & rectum,Stage II,50-59 years,236.592
 Female,Colon & rectum,Stage II,60-69 years,339.26399999999995
 Female,Colon & rectum,Stage II,70-79 years,302.56
 Female,Colon & rectum,Stage II,80+ years,282.96799999999996
-Female,Colon & rectum,Stage III,0-29 years,5.859999999999999
-Female,Colon & rectum,Stage III,30-39 years,25.784
-Female,Colon & rectum,Stage III,40-49 years,93.17399999999999
-Female,Colon & rectum,Stage III,50-59 years,279.522
-Female,Colon & rectum,Stage III,60-69 years,400.82399999999996
-Female,Colon & rectum,Stage III,70-79 years,357.46
-Female,Colon & rectum,Stage III,80+ years,334.31299999999993
+Female,Colon & rectum,Stage III,0-29 years,5.86
+Female,Colon & rectum,Stage III,30-39 years,25.784000000000002
+Female,Colon & rectum,Stage III,40-49 years,93.174
+Female,Colon & rectum,Stage III,50-59 years,279.52200000000005
+Female,Colon & rectum,Stage III,60-69 years,400.824
+Female,Colon & rectum,Stage III,70-79 years,357.46000000000004
+Female,Colon & rectum,Stage III,80+ years,334.313
 Female,Colon & rectum,Stage IV,0-29 years,5.4799999999999995
 Female,Colon & rectum,Stage IV,30-39 years,24.112000000000002
 Female,Colon & rectum,Stage IV,40-49 years,87.132
@@ -122,20 +122,20 @@ Female,Other,Stage III,50-59 years,182.94875604043688
 Female,Other,Stage III,60-69 years,247.67242436858004
 Female,Other,Stage III,70-79 years,274.55362532744596
 Female,Other,Stage III,80+ years,225.09743521380432
-Female,Other,Stage IV,0-29 years,57.02219888542877
-Female,Other,Stage IV,30-39 years,60.14445185033697
-Female,Other,Stage IV,40-49 years,125.54743500999302
-Female,Other,Stage IV,50-59 years,230.38940298954216
-Female,Other,Stage IV,60-69 years,311.8966382839879
-Female,Other,Stage IV,70-79 years,345.7484335877295
-Female,Other,Stage IV,80+ years,283.4677033929816
-Female,Other,Stage NA,0-29 years,32.412675705043
-Female,Other,Stage NA,30-39 years,34.187433164396936
-Female,Other,Stage NA,40-49 years,71.36393152349524
-Female,Other,Stage NA,50-59 years,130.95841884285383
-Female,Other,Stage NA,60-69 years,177.2889293607251
-Female,Other,Stage NA,70-79 years,196.53103655161516
-Female,Other,Stage NA,80+ years,161.1292956518708
+Female,Other,Stage IV,0-29 years,57.02219888542878
+Female,Other,Stage IV,30-39 years,60.14445185033698
+Female,Other,Stage IV,40-49 years,125.54743500999304
+Female,Other,Stage IV,50-59 years,230.3894029895422
+Female,Other,Stage IV,60-69 years,311.89663828398795
+Female,Other,Stage IV,70-79 years,345.74843358772955
+Female,Other,Stage IV,80+ years,283.46770339298166
+Female,Other,Stage NA,0-29 years,32.41267570504299
+Female,Other,Stage NA,30-39 years,34.18743316439693
+Female,Other,Stage NA,40-49 years,71.36393152349522
+Female,Other,Stage NA,50-59 years,130.9584188428538
+Female,Other,Stage NA,60-69 years,177.28892936072506
+Female,Other,Stage NA,70-79 years,196.53103655161513
+Female,Other,Stage NA,80+ years,161.12929565187076
 Female,Ovary,Stage I,0-29 years,77.48201475107561
 Female,Ovary,Stage I,30-39 years,75.4019606637984
 Female,Ovary,Stage I,40-49 years,178.36463798401968
@@ -182,11 +182,11 @@ Female,Thyroid,Stage II,30-39 years,47.72563636363636
 Female,Thyroid,Stage II,40-49 years,70.3750909090909
 Female,Thyroid,Stage II,50-59 years,68.55504545454545
 Female,Thyroid,Stage II,60-69 years,50.55681818181818
-Female,Thyroid,Stage III,0-29 years,3.9988443759630203
-Female,Thyroid,Stage III,30-39 years,7.549818181818182
-Female,Thyroid,Stage III,40-49 years,11.132782742681048
-Female,Thyroid,Stage III,50-59 years,10.84486594761171
-Female,Thyroid,Stage III,60-69 years,7.997688751926041
+Female,Thyroid,Stage III,0-29 years,3.9988443759630194
+Female,Thyroid,Stage III,30-39 years,7.549818181818181
+Female,Thyroid,Stage III,40-49 years,11.132782742681046
+Female,Thyroid,Stage III,50-59 years,10.844865947611709
+Female,Thyroid,Stage III,60-69 years,7.997688751926039
 Female,Thyroid,Stage IV,0-29 years,9.28303158705701
 Female,Thyroid,Stage IV,30-39 years,17.526363636363637
 Female,Thyroid,Stage IV,40-49 years,25.843959938366716
@@ -236,18 +236,18 @@ Male,Colon & rectum,Stage II,70-79 years,358.12100000000004
 Male,Colon & rectum,Stage II,80+ years,197.817
 Male,Colon & rectum,Stage III,0-29 years,9.517
 Male,Colon & rectum,Stage III,30-39 years,28.244
-Male,Colon & rectum,Stage III,40-49 years,107.143
-Male,Colon & rectum,Stage III,50-59 years,362.567
-Male,Colon & rectum,Stage III,60-69 years,641.63
-Male,Colon & rectum,Stage III,70-79 years,471.85900000000004
-Male,Colon & rectum,Stage III,80+ years,260.64300000000003
-Male,Colon & rectum,Stage IV,0-29 years,7.967
-Male,Colon & rectum,Stage IV,30-39 years,23.644000000000002
-Male,Colon & rectum,Stage IV,40-49 years,89.693
-Male,Colon & rectum,Stage IV,50-59 years,303.517
-Male,Colon & rectum,Stage IV,60-69 years,537.13
-Male,Colon & rectum,Stage IV,70-79 years,395.009
-Male,Colon & rectum,Stage IV,80+ years,218.193
+Male,Colon & rectum,Stage III,40-49 years,107.14299999999999
+Male,Colon & rectum,Stage III,50-59 years,362.56699999999995
+Male,Colon & rectum,Stage III,60-69 years,641.6299999999999
+Male,Colon & rectum,Stage III,70-79 years,471.859
+Male,Colon & rectum,Stage III,80+ years,260.643
+Male,Colon & rectum,Stage IV,0-29 years,7.966999999999999
+Male,Colon & rectum,Stage IV,30-39 years,23.644
+Male,Colon & rectum,Stage IV,40-49 years,89.69299999999998
+Male,Colon & rectum,Stage IV,50-59 years,303.51699999999994
+Male,Colon & rectum,Stage IV,60-69 years,537.1299999999999
+Male,Colon & rectum,Stage IV,70-79 years,395.00899999999996
+Male,Colon & rectum,Stage IV,80+ years,218.19299999999998
 Male,Kidney,Stage I,30-39 years,17.106972972972972
 Male,Kidney,Stage I,40-49 years,69.67962162162164
 Male,Kidney,Stage I,50-59 years,142.6971891891892
@@ -269,7 +269,7 @@ Male,Kidney,Stage IV,50-59 years,137.71045945945946
 Male,Kidney,Stage IV,60-69 years,193.27783783783784
 Male,Kidney,Stage IV,70-79 years,121.60397297297297
 Male,Liver,Stage I,40-49 years,45.55889514066496
-Male,Liver,Stage I,50-59 years,182.59431202046034
+Male,Liver,Stage I,50-59 years,182.59431202046036
 Male,Liver,Stage I,60-69 years,333.97898721227625
 Male,Liver,Stage I,70-79 years,273.7121023017903
 Male,Liver,Stage I,80+ years,146.00370332480819
@@ -300,18 +300,18 @@ Male,Lung,Stage II,50-59 years,42.108420834974396
 Male,Lung,Stage II,60-69 years,91.00852244978337
 Male,Lung,Stage II,70-79 years,96.91433182355257
 Male,Lung,Stage II,80+ years,57.64069948798739
-Male,Lung,Stage III,30-39 years,5.701608507286333
-Male,Lung,Stage III,40-49 years,31.180671524222134
-Male,Lung,Stage III,50-59 years,127.0389645529736
-Male,Lung,Stage III,60-69 years,274.5680846790075
+Male,Lung,Stage III,30-39 years,5.701608507286332
+Male,Lung,Stage III,40-49 years,31.18067152422213
+Male,Lung,Stage III,50-59 years,127.03896455297358
+Male,Lung,Stage III,60-69 years,274.5680846790074
 Male,Lung,Stage III,70-79 years,292.38561126427726
-Male,Lung,Stage III,80+ years,173.89905947223315
-Male,Lung,Stage IV,30-39 years,20.08375580937377
-Male,Lung,Stage IV,40-49 years,109.83303958251281
-Male,Lung,Stage IV,50-59 years,447.4911841276093
-Male,Lung,Stage IV,60-69 years,967.1583656951556
-Male,Lung,Stage IV,70-79 years,1029.9201025994487
-Male,Lung,Stage IV,80+ years,612.5545521859
+Male,Lung,Stage III,80+ years,173.89905947223312
+Male,Lung,Stage IV,30-39 years,20.083755809373766
+Male,Lung,Stage IV,40-49 years,109.8330395825128
+Male,Lung,Stage IV,50-59 years,447.49118412760924
+Male,Lung,Stage IV,60-69 years,967.1583656951555
+Male,Lung,Stage IV,70-79 years,1029.9201025994485
+Male,Lung,Stage IV,80+ years,612.5545521858999
 Male,Lymphoid neoplasms,Stage NA,0-29 years,266.0
 Male,Lymphoid neoplasms,Stage NA,30-39 years,108.0
 Male,Lymphoid neoplasms,Stage NA,40-49 years,213.0
@@ -353,12 +353,12 @@ Male,Other,Stage III,50-59 years,316.81025240758294
 Male,Other,Stage III,60-69 years,367.3650799194313
 Male,Other,Stage III,70-79 years,249.59105582701423
 Male,Other,Stage III,80+ years,170.57573282701424
-Male,Other,Stage IV,0-29 years,127.09338028528174
-Male,Other,Stage IV,30-39 years,129.12920102211692
-Male,Other,Stage IV,40-49 years,237.60936314204847
-Male,Other,Stage IV,50-59 years,492.08695524644554
-Male,Other,Stage IV,60-69 years,570.6114693815166
-Male,Other,Stage IV,70-79 years,387.67843460018435
+Male,Other,Stage IV,0-29 years,127.09338028528171
+Male,Other,Stage IV,30-39 years,129.1292010221169
+Male,Other,Stage IV,40-49 years,237.6093631420484
+Male,Other,Stage IV,50-59 years,492.0869552464454
+Male,Other,Stage IV,60-69 years,570.6114693815165
+Male,Other,Stage IV,70-79 years,387.67843460018423
 Male,Other,Stage IV,80+ years,264.94752732240653
 Male,Other,Stage NA,0-29 years,77.70018777817272
 Male,Other,Stage NA,30-39 years,78.94481321169037
@@ -376,25 +376,25 @@ Male,Pancreas,Stage II,80+ years,22.248661971830987
 Male,Pancreas,Stage III,60-69 years,57.34875
 Male,Pancreas,Stage III,70-79 years,55.41020070422535
 Male,Pancreas,Stage III,80+ years,24.878049295774648
-Male,Pancreas,Stage IV,60-69 years,338.4975
-Male,Pancreas,Stage IV,70-79 years,327.0553309859155
+Male,Pancreas,Stage IV,60-69 years,338.49749999999995
+Male,Pancreas,Stage IV,70-79 years,327.0553309859154
 Male,Pancreas,Stage IV,80+ years,146.8411690140845
 Male,Prostate,Stage I,50-59 years,64.74230994371483
 Male,Prostate,Stage I,60-69 years,272.795112945591
 Male,Prostate,Stage I,70-79 years,269.07276247654784
 Male,Prostate,Stage I,80+ years,101.96581463414634
 Male,Prostate,Stage II,50-59 years,128.50367579737338
-Male,Prostate,Stage II,60-69 years,541.4569666041275
-Male,Prostate,Stage II,70-79 years,534.0686649155722
-Male,Prostate,Stage II,80+ years,202.3866926829268
+Male,Prostate,Stage II,60-69 years,541.4569666041276
+Male,Prostate,Stage II,70-79 years,534.0686649155723
+Male,Prostate,Stage II,80+ years,202.38669268292685
 Male,Prostate,Stage III,50-59 years,144.68925328330207
 Male,Prostate,Stage III,60-69 years,609.6557448405252
 Male,Prostate,Stage III,70-79 years,601.3368555347092
 Male,Prostate,Stage III,80+ years,227.87814634146338
-Male,Prostate,Stage IV,50-59 years,152.53680600375236
+Male,Prostate,Stage IV,50-59 years,152.53680600375233
 Male,Prostate,Stage IV,60-69 years,642.7218191369606
-Male,Prostate,Stage IV,70-79 years,633.9517358348969
-Male,Prostate,Stage IV,80+ years,240.23763902439023
+Male,Prostate,Stage IV,70-79 years,633.9517358348968
+Male,Prostate,Stage IV,80+ years,240.2376390243902
 Male,Stomach,Stage I,40-49 years,20.732607868020306
 Male,Stomach,Stage I,50-59 years,70.17190355329949
 Male,Stomach,Stage I,60-69 years,116.42156725888323
