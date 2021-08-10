@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const { authenticate } = require('./auth.js');
 const organizationId = process.env.ONCOSHOT_ORGANISATION
-
+const API_HOSTNAME = process.env.API_HOSTNAME
 let results;
 
 function retrieveFile() {
@@ -30,7 +30,7 @@ function retrieveFile() {
 function uploadProfiles() {
     authenticate().then(async (token, err) => {
         let log = ""
-        if (token == '' || err) {
+        if (!token || err) {
             throw new Error('Authentication Failure')
         }
 
@@ -51,7 +51,7 @@ function uploadProfiles() {
                 const data = JSON.stringify(results[i])
 
                 const options = {
-                    hostname: 'api.oncodevel.com',
+                    hostname: API_HOSTNAME,
                     path: `/api/v1/organizations/${organizationId}/profiles/${id}/import`,
                     method: 'PUT',
                     headers: {
@@ -91,7 +91,6 @@ function uploadProfiles() {
         }
 
         console.log(`\nUpload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`)
-        console.log(`Undo the upload by running "npm run delete"`)
 
         log += `Upload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`
 

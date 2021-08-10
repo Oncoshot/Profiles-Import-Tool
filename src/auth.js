@@ -9,7 +9,7 @@ async function authenticate() {
             body: `{"client_id":"${process.env.AUTH0_CLIENT_ID}","client_secret":"${process.env.AUTH0_CLIENT_SECRET}","audience":"${process.env.AUTH0_DOMAIN}","grant_type":"client_credentials"}`
         }
         request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+            if (error || JSON.parse(body).error) throw new Error("Authentication Failed");
             res(JSON.parse(body).access_token)
         });
 
