@@ -76,6 +76,10 @@ samples.rename(columns={'Birthyear': 'dob_Unstructured',
                         'Location': 'location_Unstructured'
                         }, inplace=True)
 
+samples['referenceNo'] = samples.index.get_level_values(level='id').tolist()
+samples['firstName'] = 'Imported'
+samples['lastName'] = 'Profile'
+
 # Converted all unstructured to items in array
 
 def toArray(data):
