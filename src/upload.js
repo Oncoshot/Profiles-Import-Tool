@@ -91,7 +91,6 @@ function uploadProfiles() {
         }
 
         console.log(`\nUpload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`)
-        console.log(`Undo the upload by running "npm run delete"`)
 
         log += `Upload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`
 
