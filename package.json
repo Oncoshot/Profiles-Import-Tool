@@ -4,14 +4,14 @@
   "description": "This tool is an example how to import profiles to Oncoshot via its API",
   "main": "src/upload.js",
   "scripts": {
-    "upload": "env-cmd -f config/auth.env node src/upload.js"
+    "upload": "env-cmd -f config.env node src/upload.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Oncoshot/Profiles-Import-Tool.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Oncoshot/Profiles-Import-Tool/issues"
   },
