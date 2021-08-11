@@ -14,6 +14,7 @@ To run the tool, take the following steps
     * AUTH0_CLIENT_ID= // Client ID provided
     * AUTH0_DOMAIN= // Domain to be authenticated, should be api.oncoshot.com
     * AUTH0_CLIENT_SECRET= // Secret Key provided to you
+    * AUTH0_URL = // Location to authenticate, typically https://auth.oncoshot.com/oauth/token
     * ONCOSHOT_ORGANISATION= // Your organisation name on Oncoshot
     * API_HOSTNAME= // Host nname of the API, typically api.oncoshot.com
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
@@ -32,7 +33,7 @@ WARNING: Do not share the auth.env file or secret key in a public forum or commi
 ## sg-cancer-registry-dataset
 This tools is an example of generating profiles from a dataset to generate a JSON file that can be uploaded.
 The tool is written in Python3 and ultilises the Singapore Cancer Report 2018 as its source data.
-SCR 2018 is summarised in the Distributions.xlsx and converted to a CSV file to be read by the program.
+SCR 2018 is summarised in the source-data.xlsx and converted to a CSV file to be read by the program.
 
 ### Getting Started
 1. Run the command `python sg-cancer-registry-dataset/main.py`
