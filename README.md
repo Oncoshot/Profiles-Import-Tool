@@ -14,6 +14,7 @@ To run the tool, take the following steps
     * AUTH0_CLIENT_ID= // Client ID provided
     * AUTH0_DOMAIN= // Domain to be authenticated, should be api.oncoshot.com
     * AUTH0_CLIENT_SECRET= // Secret Key provided to you
+    * AUTH0_URL = // Location to authenticate, typically https://auth.oncoshot.com/oauth/token
     * ONCOSHOT_ORGANISATION= // Your organisation name on Oncoshot
     * API_HOSTNAME= // Host nname of the API, typically api.oncoshot.com
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
