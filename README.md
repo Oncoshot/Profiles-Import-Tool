@@ -46,3 +46,18 @@ SCR 2018 is summarised in the source-data.xlsx and converted to a CSV file to be
 ### Function Details
 1. `sg-cancer-registry-dataset/main.py`
 The python script uses pandas dataframes to format, rename and calculate data.
+
+## mskcc-dataset
+The tool is written in Python3 and ultilises the MSKCC Impact Report 2017 as its source data.
+The files used is in mskcc-dataset/source-data and will be used by the program to produce patients JSON.
+
+### Getting Started
+1. Run the command `python mskcc-dataset/main.py`
+2. The `patients.csv` file and `patients.json` file will be generated
+    * `patients.csv` contains the profiles generated from the source information
+    * `patients.json` contains the profiles formatted to be uploaded to the Oncoshot API
+3. Upload the `patients.json` file
+
+### Function Details
+1. `mskcc-dataset/main.py`
+The python script uses pandas dataframes to format, rename and calculate data.
