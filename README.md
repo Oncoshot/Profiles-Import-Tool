@@ -50,7 +50,7 @@ The python script uses pandas dataframes to format, rename and calculate data.
 ## mskcc-dataset
 The tool is written in Python3 and ultilises the MSKCC Impact Report 2017 as its source data.
 The files used is in mskcc-dataset/source-data and will be used by the program to produce patients JSON.
-
+http://www.cbioportal.org/study/summary?id=msk_impact_2017
 ### Getting Started
 1. Run the command `python mskcc-dataset/main.py`
 2. The `patients.csv` file and `patients.json` file will be generated
