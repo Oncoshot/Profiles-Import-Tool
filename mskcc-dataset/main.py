@@ -1,3 +1,5 @@
+from numpy.core.numeric import NaN
+from numpy.lib.type_check import nan_to_num
 import pandas as pd
 import numpy as np
 import json
@@ -19,7 +21,18 @@ mutation = pd.read_csv('mskcc-dataset/source-data/data_mutations_mskcc.txt',
                        usecols=['Hugo_Symbol', 'HGVSp_Short', 'Tumor_Sample_Barcode'])
 
 # Pre-Processing
-mutation[['temp', 'Alteration']] = mutation['HGVSp_Short'].str.split(".", expand=True) #get Alteration  
+
+# Catch empty alterations and remove p. prefix
+
+
+def removePrefix(x):
+    if str(x) == 'nan':
+        return ""
+    else:
+        return x[2:]
+
+
+mutation['Alteration'] = list(map(removePrefix, list(mutation['HGVSp_Short'])))
 
 mutation['MUTATION'] = mutation['Hugo_Symbol'] + ": " + mutation['Alteration']
 
@@ -35,7 +48,7 @@ combined_mutations = pd.merge(
 
 combined = pd.merge(patients, combined_mutations, on=[
                     'PATIENT_ID']).groupby(by=["PATIENT_ID"]).agg({
-                        "SEX": lambda x: x.iloc[0],
+                        "SEX": lambda x: [x.iloc[0]],
                         'CANCER_TYPE': lambda x: list(set(x)),
                         'CANCER_TYPE_DETAILED': lambda x: list(set(x)),
                         'METASTATIC_SITE': lambda x: list(set(x)),
