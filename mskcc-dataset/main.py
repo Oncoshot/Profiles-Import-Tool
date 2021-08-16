@@ -59,7 +59,7 @@ combined = pd.merge(
         'MUTATION': lambda x: list(set(filter(None, [item for sublist in x for item in sublist])))
     })
 
-combined['CANCER_STAGE'] = combined['METASTATIC_SITE'].apply(lambda s: 'Stage 4' if s else '')
+combined['CANCER_STAGE'] = combined['METASTATIC_SITE'].apply(lambda s: ['Stage 4'] if s else '')
 combined['CANCER'] = combined['CANCER_TYPE'] + combined['CANCER_TYPE_DETAILED']
 
 combined = combined.drop(columns=['CANCER_TYPE', "CANCER_TYPE_DETAILED"])
