@@ -1,5 +1,3 @@
-from numpy.core.numeric import NaN
-from numpy.lib.type_check import nan_to_num
 import pandas as pd
 import numpy as np
 import json
@@ -8,54 +6,62 @@ import json
 patients = pd.read_csv('mskcc-dataset/source-data/data_clinical_patient.txt',
                        sep="\t",
                        header=1,
+                       keep_default_na=False,
                        usecols=['PATIENT_ID', 'SEX'])
 
 samples = pd.read_csv('mskcc-dataset/source-data/data_clinical_sample.txt',
                       sep="\t",
                       header=4,
+                      keep_default_na=False,
                       usecols=['PATIENT_ID', 'SAMPLE_ID', 'CANCER_TYPE', 'CANCER_TYPE_DETAILED', 'METASTATIC_SITE'])
 
 mutation = pd.read_csv('mskcc-dataset/source-data/data_mutations_mskcc.txt',
                        sep="\t",
                        header=1,
+                       keep_default_na=False,
                        usecols=['Hugo_Symbol', 'HGVSp_Short', 'Tumor_Sample_Barcode'])
 
 # Pre-Processing
 
-# Catch empty alterations and remove p. prefix
+## forming mutation string
+mutation['Alteration'] = mutation['HGVSp_Short'].apply(lambda s: s.replace('p.', ''))
 
+mutation['MUTATION'] = mutation[['Hugo_Symbol', 'Alteration']].apply(lambda x: ': '.join(x).strip(': '), axis=1)
 
-def removePrefix(x):
-    if str(x) == 'nan':
-        return ""
-    else:
-        return x[2:]
+## clean up Metastatic Site
+samples['METASTATIC_SITE'].loc[(samples['METASTATIC_SITE']=='Not Applicable')]=''
 
-
-mutation['Alteration'] = list(map(removePrefix, list(mutation['HGVSp_Short'])))
-
-mutation['MUTATION'] = mutation['Hugo_Symbol'] + ": " + mutation['Alteration']
-
-# Combine mutation and samples
+## Combine samples with mutation 
 combined_mutations = pd.merge(
-    samples, mutation, left_on=['SAMPLE_ID'], right_on=["Tumor_Sample_Barcode"]).groupby(by=["SAMPLE_ID"]).agg({
+    samples, 
+    mutation, 
+    left_on=['SAMPLE_ID'], 
+    right_on=["Tumor_Sample_Barcode"],
+    how='left'
+    ).groupby(by=["SAMPLE_ID"]).agg({
         'PATIENT_ID': lambda x: x.iloc[0],
         'METASTATIC_SITE': lambda x: x.iloc[0],
         'CANCER_TYPE': lambda x: x.iloc[0],
         'CANCER_TYPE_DETAILED': lambda x: x.iloc[0],
-        'MUTATION': lambda x: list(x)
+        'MUTATION': lambda x: [] if x.isna().any() else list(x)
     })
 
-combined = pd.merge(patients, combined_mutations, on=[
-                    'PATIENT_ID']).groupby(by=["PATIENT_ID"]).agg({
-                        "SEX": lambda x: [x.iloc[0]],
-                        'CANCER_TYPE': lambda x: list(set(x)),
-                        'CANCER_TYPE_DETAILED': lambda x: list(set(x)),
-                        'METASTATIC_SITE': lambda x: list(set(x)),
-                        'MUTATION': lambda x: list(set([item for sublist in x for item in sublist]))
-                    })
+combined = pd.merge(
+    patients, 
+    combined_mutations, 
+    on=['PATIENT_ID'],
+    how='left'
+    ).groupby(by=["PATIENT_ID"]).agg({
+        "SEX": lambda x: [x.iloc[0]],
+        'CANCER_TYPE': lambda x: list(set(filter(None, x))),
+        'CANCER_TYPE_DETAILED': lambda x: list(set(filter(None, x))),
+        'METASTATIC_SITE': lambda x: list(set(filter(None, x))),
+        'MUTATION': lambda x: list(set(filter(None, [item for sublist in x for item in sublist])))
+    })
 
+combined['CANCER_STAGE'] = combined['METASTATIC_SITE'].apply(lambda s: 'Stage 4' if s else '')
 combined['CANCER'] = combined['CANCER_TYPE'] + combined['CANCER_TYPE_DETAILED']
+
 combined = combined.drop(columns=['CANCER_TYPE', "CANCER_TYPE_DETAILED"])
 
 # Output to CSV
@@ -63,6 +69,7 @@ combined.to_csv('mskcc-dataset/patients.csv')
 
 # Processing for JSON
 combined.rename(columns={'CANCER': 'diagnoses_Cancer_Unstructured',
+                         'CANCER_STAGE': 'cancerStage_Unstructured',
                          'SEX': 'gender_Unstructured',
                          'METASTATIC_SITE': 'organInvolved_Unstructured',
                          'MUTATION': 'mutations_Unstructured'
