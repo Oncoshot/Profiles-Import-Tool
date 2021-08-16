@@ -55,6 +55,7 @@ samples = samples.reset_index().rename_axis(['id'])
 
 samples['Birthyear'] = 2021 - samples['Age']
 samples['Location'] = 'Singapore'
+samples['Stage'].loc[(samples['Stage']=='Stage NA')]=''
 
 # drop columns
 
