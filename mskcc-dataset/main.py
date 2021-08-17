@@ -61,6 +61,8 @@ combined = pd.merge(
 
 combined['CANCER_STAGE'] = combined['METASTATIC_SITE'].apply(lambda s: ['Stage 4'] if s else '')
 combined['CANCER'] = combined['CANCER_TYPE'] + combined['CANCER_TYPE_DETAILED']
+combined['LOCATION'] = [['United States'] for _ in range(len(combined))]
+
 
 combined = combined.drop(columns=['CANCER_TYPE', "CANCER_TYPE_DETAILED"])
 
@@ -72,7 +74,8 @@ combined.rename(columns={'CANCER': 'diagnoses_Cancer_Unstructured',
                          'CANCER_STAGE': 'cancerStage_Unstructured',
                          'SEX': 'gender_Unstructured',
                          'METASTATIC_SITE': 'organInvolved_Unstructured',
-                         'MUTATION': 'mutations_Unstructured'
+                         'MUTATION': 'mutations_Unstructured',
+                         'LOCATION': 'location_Unstructured'
                          }, inplace=True)
 combined = combined.rename_axis("id")
 combined['referenceNo'] = combined.index.get_level_values(level='id').tolist()
