@@ -31,11 +31,11 @@ mutation['MUTATION'] = mutation[['Hugo_Symbol', 'Alteration']].apply(lambda x: '
 ## clean up Metastatic Site
 samples['METASTATIC_SITE'].loc[(samples['METASTATIC_SITE']=='Not Applicable')]=''
 
-## Combine samples with mutation 
+## Combine samples with mutation
 combined_mutations = pd.merge(
-    samples, 
-    mutation, 
-    left_on=['SAMPLE_ID'], 
+    samples,
+    mutation,
+    left_on=['SAMPLE_ID'],
     right_on=["Tumor_Sample_Barcode"],
     how='left'
     ).groupby(by=["SAMPLE_ID"]).agg({
@@ -47,16 +47,16 @@ combined_mutations = pd.merge(
     })
 
 combined = pd.merge(
-    patients, 
-    combined_mutations, 
+    patients,
+    combined_mutations,
     on=['PATIENT_ID'],
     how='left'
     ).groupby(by=["PATIENT_ID"]).agg({
         "SEX": lambda x: [x.iloc[0]],
-        'CANCER_TYPE': lambda x: list(set(filter(None, x))),
-        'CANCER_TYPE_DETAILED': lambda x: list(set(filter(None, x))),
-        'METASTATIC_SITE': lambda x: list(set(filter(None, x))),
-        'MUTATION': lambda x: list(set(filter(None, [item for sublist in x for item in sublist])))
+        'CANCER_TYPE': lambda x: sorted(set(filter(None, x))),
+        'CANCER_TYPE_DETAILED': lambda x: sorted(set(filter(None, x))),
+        'METASTATIC_SITE': lambda x: sorted(set(filter(None, x))),
+        'MUTATION': lambda x: sorted(set(filter(None, [item for sublist in x for item in sublist])))
     })
 
 combined['CANCER_STAGE'] = combined['METASTATIC_SITE'].apply(lambda s: ['Stage 4'] if s else '')
