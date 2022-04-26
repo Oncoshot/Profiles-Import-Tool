@@ -3,7 +3,7 @@
 ## Upload Tool
 This tool is an example how to import profiles to Oncoshot via its API
 
-This tool is written in node.js. The API documentation is available on https://api.oncoshot.com/swagger/index.html
+This tool is written in node.js. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
 
 ### Getting Started
 
@@ -61,3 +61,15 @@ http://www.cbioportal.org/study/summary?id=msk_impact_2017
 ### Function Details
 1. `mskcc-dataset/main.py`
 The python script uses pandas dataframes to format, rename and calculate data.
+
+# Profile-Delete-Tool
+## Upload Tool
+This tool is an example how to delete profiles from Oncoshot via its DELETE API
+This tool is written in node.js. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
+
+### Getting Started
+To run the tool, take the following steps
+1. Prepare a Json file to include ONLY profiles need to be deleted.
+2. Run the commannd, `npm run delete <Location of Json file>` to start the tool (eg. `npm run delete data/profiles_to_be_deleted_samples.json`)
+3. Logs will be printed to the console and saved in a .txt file in the logs folder
+
