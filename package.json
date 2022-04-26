@@ -4,7 +4,8 @@
   "description": "This tool is an example how to import profiles to Oncoshot via its API",
   "main": "src/upload.js",
   "scripts": {
-    "upload": "env-cmd -f config.env node src/upload.js"
+    "upload": "env-cmd -f config.env node src/upload.js",
+    "delete": "env-cmd -f config.env node src/delete.js"
   },
   "repository": {
     "type": "git",
