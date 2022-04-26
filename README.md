@@ -63,7 +63,7 @@ http://www.cbioportal.org/study/summary?id=msk_impact_2017
 The python script uses pandas dataframes to format, rename and calculate data.
 
 # Profile-Delete-Tool
-## Upload Tool
+## Delete Tool
 This tool is an example how to delete profiles from Oncoshot via its DELETE API
 This tool is written in node.js. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
 
