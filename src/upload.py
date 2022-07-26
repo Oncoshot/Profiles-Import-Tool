@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 import errno
 import auth
@@ -6,6 +7,8 @@ import http
 import http.client
 
 onlyProfilesIds = []
+API_HOSTNAME = os.environ.get('API_HOSTNAME')
+ONCOSHOT_ORGANISATION = os.environ.get('ONCOSHOT_ORGANISATION')
 
 def retrieveFile():
     try:
@@ -39,7 +42,7 @@ def uploadFile(results):
     if len(onlyProfilesIds):
         results = filter(lambda item: item['id'] in onlyProfilesIds, results)
 
-    conn = http.client.HTTPSConnection('apisite.oncodevel.com')
+    conn = http.client.HTTPSConnection(API_HOSTNAME)
 
     headers = {
         'Content-Type': 'application/json-patch+json',
@@ -50,7 +53,7 @@ def uploadFile(results):
         id = results[i]['id']
         del results[i]['id']
         data = json.dumps(results[i])
-        url = '/api/v1/organizations/NCC/profiles/%s/import' % id
+        url = '/api/v1/organizations/%s/profiles/%s/import' % (ONCOSHOT_ORGANISATION, id)
         conn.request('PUT', url, headers=headers, body=str(data))
 
         res = conn.getresponse()
@@ -78,4 +81,3 @@ print("403: Failure, no access to organisation")
 print("422: Failure, data is wrongly formatted\n")
 
 retrieveFile()
-
