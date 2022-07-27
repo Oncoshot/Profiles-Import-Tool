@@ -6,13 +6,16 @@ import auth
 import http
 import http.client
 from dotenv import load_dotenv
+from datetime import date
 
+# load environment variables from config.env example file
 load_dotenv("../config.env")
 
 onlyProfilesIds = []
 API_HOSTNAME = os.getenv('API_HOSTNAME')
 ONCOSHOT_ORGANISATION = os.getenv('ONCOSHOT_ORGANISATION')
 
+# open data file and retrieve json data
 def retrieveFile():
     try:
         if len(sys.argv) < 2:
@@ -23,14 +26,16 @@ def retrieveFile():
         uploadFile(results)
         print(results)
         print("Profiles to upload : %d" % len(results))
+        openInputFileName.close()
     except (IOError, OSError) as e:
         if e.errno == errno.ENOENT:
             print("%s is not a valid json file location" % inputFileName)
         else:
             print(e)
 
-
+# upload data to the Oncoshot system
 def uploadFile(results):
+    # check authentication
     try:
         token = auth.authenticate()
     except:
@@ -51,7 +56,12 @@ def uploadFile(results):
         'Content-Type': 'application/json-patch+json',
         'authorization': 'Bearer ' + token
     }
+    log_file = "../logs/" + date.today().strftime("%d-%m-%Y") + "-upload-log.txt"
 
+    with open(log_file, 'w') as f:
+        f.write("")
+
+    # upload data to Oncoshot
     for i in range(len(results)):
         id = results[i]['id']
         del results[i]['id']
@@ -62,6 +72,8 @@ def uploadFile(results):
         res = conn.getresponse()
 
         print(res.status)
+        with open(log_file, 'a') as f:
+            f.write("%d Profile %s: statusCode: %d\n" % (i, id, res.status))
 
         if res.status in [201, 204]:
             successCount += 1
@@ -71,7 +83,14 @@ def uploadFile(results):
         data = res.read()
 
         # print(data.decode('utf-8'))
-
+    if failureCount > 0:
+        with open(log_file, 'a') as f:
+            f.write("Error")
+    else:
+        with open(log_file, 'a') as f:
+            f.write("Upload complete\n")
+            f.write("Successful: %d\n" % successCount)
+            f.write("Failed: %d\n" % failureCount)
     print("Successfully imported %d profiles" % successCount)
 
 

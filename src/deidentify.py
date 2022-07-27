@@ -17,7 +17,9 @@ def deidentifyPatient():
         id = sys.argv[1]
         concatenatedId = id + "" + SALT
         print(concatenatedId)
+        # hashed result
         hashedId = hashlib.sha256(concatenatedId.encode('utf-8')).hexdigest()
+        # extract the first 12 characters
         condensedHash = hashedId[0:noOfCharacters]
         print(condensedHash)
     except Exception as e:

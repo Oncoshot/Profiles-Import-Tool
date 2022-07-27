@@ -3,6 +3,7 @@ import json
 import os
 from dotenv import load_dotenv
 
+# load environment variables from config.env example file
 load_dotenv("../config.env")
 
 AUTH0_CLIENT_ID = os.getenv("AUTH0_CLIENT_ID")
@@ -11,7 +12,7 @@ AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
 AUTH0_URL = os.getenv('AUTH0_URL')
 AUTH0_URL = AUTH0_URL.replace("https://", "").replace("/oauth/token", "")
 
-
+# authenticate connection
 def authenticate():
     print(AUTH0_URL)
     conn = http.client.HTTPSConnection(AUTH0_URL)

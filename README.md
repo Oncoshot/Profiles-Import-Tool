@@ -11,14 +11,14 @@ To run the tool, take the following steps
 1. Create an empty folder `logs` in root
 2. Run npm install to install packages **(JavaScript implementatino only)**
 3. Install the dotenv package using `pip install python-dotenv` **(Python implementation only)**
-4. In the config folder, create an `config.env` file with the following fields. These fields should be filled with the auth info provided by OS based on your organisation.
+4. In the root folder, create an `config.env` file with the following fields. These fields should be filled with the auth info provided by OS based on your organisation.
     * AUTH0_CLIENT_ID= // Client ID provided
     * AUTH0_DOMAIN= // Domain to be authenticated, should be api.oncoshot.com
     * AUTH0_CLIENT_SECRET= // Secret Key provided to you
     * AUTH0_URL = // Location to authenticate, typically https://auth.oncoshot.com/oauth/token
     * ONCOSHOT_ORGANISATION= // Your organisation name on Oncoshot
     * API_HOSTNAME= // Host name of the API, typically api.oncoshot.com
-    * SALT= // A secret string associated with your organization, used in the de-identification of patient IDs
+    * SALT= // A secret string associated with your organization, used in the de-identification of patient IDs. This salt is case-sensitive.
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
     
 To run the tool in JavaScript,
@@ -41,7 +41,10 @@ To run the tool in Python,
 ## De-identification of Patient IDs
 This hashing tool implemented in Python helps you de-identify patient IDs. Hashing refers to transforming a given key to another value
 and hence is useful for de-identifying patient IDs. This tool uses the SHA256 hashing implementation, for which more details
-can be found [here](https://en.wikipedia.org/wiki/SHA-2).
+can be found [here](https://en.wikipedia.org/wiki/SHA-2). To use this tool, concatenate your salt to your patient id, and enter it into the
+tool. For example, if your salt is "abc", and your patient ID is 1234, you should enter 1234abc. The online tool will return the hashed result,
+which in this case, is dd130a849d7b29e5541b05d2f7f86a4acd4f1ec598c1c9438783f56bc4f0ff80. The first 12 characters of this result form your de-identified id,
+making it dd130a849d7b.
 
 To run the tool from the command line, run the command, 
 
