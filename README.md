@@ -42,10 +42,7 @@ To run the tool in Python,
 ## De-identification of Patient IDs
 This hashing tool implemented in Python helps you de-identify patient IDs. Hashing refers to transforming a given key to another value
 and hence is useful for de-identifying patient IDs. This tool uses the SHA256 hashing implementation, for which more details
-can be found [here](https://en.wikipedia.org/wiki/SHA-2). To use this tool, concatenate your salt to your patient id, and enter it into the
-tool. For example, if your salt is "abc", and your patient ID is 1234, you should enter 1234abc. The online tool will return the hashed result,
-which in this case, is dd130a849d7b29e5541b05d2f7f86a4acd4f1ec598c1c9438783f56bc4f0ff80. The first 12 characters of this result form your de-identified id,
-making it dd130a849d7b.
+can be found [here](https://en.wikipedia.org/wiki/SHA-2).
 
 To run the tool from the command line, run the command, 
 
@@ -53,7 +50,10 @@ To run the tool from the command line, run the command,
 
 You can corroborate the results by using online tools such as [this SHA256 Online Hashing Tool](https://emn178.github.io/online-tools/sha256.html),
 and also a sample Excel workbook (De-identify patient ID.xlsm) provided in the `src` folder. Details on the usage of this
-workbook are mentioned within.
+workbook are mentioned within. To use the online tool, concatenate your salt to your patient id, and enter it into the
+tool. For example, if your salt is "abc", and your patient ID is 1234, you should enter 1234abc. The online tool will return the hashed result,
+which in this case, is dd130a849d7b29e5541b05d2f7f86a4acd4f1ec598c1c9438783f56bc4f0ff80. The first 12 characters of this result form your de-identified id,
+making it dd130a849d7b.
 
 ## sg-cancer-registry-dataset
 This tools is an example of generating profiles from a dataset to generate a JSON file that can be uploaded.
