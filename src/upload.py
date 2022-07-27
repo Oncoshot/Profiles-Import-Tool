@@ -32,7 +32,7 @@ def retrieveFile():
 
 def uploadFile(results):
     try:
-        res = auth.authenticate()
+        token = auth.authenticate()
     except:
         print("Authentication Failed")
         raise Exception("Authentication Failed")
@@ -49,7 +49,7 @@ def uploadFile(results):
 
     headers = {
         'Content-Type': 'application/json-patch+json',
-        'authorization': 'Bearer ' + res
+        'authorization': 'Bearer ' + token
     }
 
     for i in range(len(results)):
