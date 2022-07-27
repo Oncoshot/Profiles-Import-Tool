@@ -10,7 +10,6 @@ load_dotenv("config.env")
 SALT = os.environ.get('SALT')
 noOfCharacters = 12
 
-
 def deidentifyPatient():
     try:
         if len(sys.argv) < 2:
