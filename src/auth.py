@@ -14,7 +14,6 @@ AUTH0_URL = AUTH0_URL.replace("https://", "").replace("/oauth/token", "")
 
 # authenticate connection
 def authenticate():
-    print(AUTH0_URL)
     conn = http.client.HTTPSConnection(AUTH0_URL)
 
     payload = "{\"client_id\":\"%s\",\"client_secret\":\"%s\",\"audience\":\"%s\",\"grant_type\":\"client_credentials\"}" \

@@ -23,9 +23,8 @@ def retrieveFile():
         inputFileName = sys.argv[1]
         openInputFileName = open(inputFileName)
         results = json.load(openInputFileName)
-        uploadFile(results)
-        print(results)
         print("Profiles to upload : %d" % len(results))
+        uploadFile(results)
         openInputFileName.close()
     except (IOError, OSError) as e:
         if e.errno == errno.ENOENT:
@@ -71,9 +70,10 @@ def uploadFile(results):
 
         res = conn.getresponse()
 
-        print(res.status)
         with open(log_file, 'a') as f:
             f.write("%d Profile %s: statusCode: %d\n" % (i, id, res.status))
+
+        print("%d Profile %s: statusCode: %d" % (i, id, res.status))
 
         if res.status in [201, 204]:
             successCount += 1
@@ -86,12 +86,15 @@ def uploadFile(results):
     if failureCount > 0:
         with open(log_file, 'a') as f:
             f.write("Error")
+        print("Error")
     else:
         with open(log_file, 'a') as f:
             f.write("Upload complete\n")
             f.write("Successful: %d\n" % successCount)
             f.write("Failed: %d\n" % failureCount)
-    print("Successfully imported %d profiles" % successCount)
+        print("Upload complete")
+        print("Successful: %d" % successCount)
+        print("Failed: %d" % failureCount)
 
 
 print("This tool uploads the formatted JSON file to the Oncoshot API.\n")

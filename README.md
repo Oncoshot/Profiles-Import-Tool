@@ -26,7 +26,8 @@ To run the tool in JavaScript,
 2. Logs will be printed to the console and saved in a .txt file in the logs folder
 
 To run the tool in Python,
-1. Run the command, `python src/upload.py <Location of File>` to start the tool (eg. `python src/upload.py data/samples.json`)
+1. `cd` into the `src` folder using the command, `cd src`
+2. Run the command, `python upload.py <Location of File>` to start the tool (eg. `python upload.py ../data/samples.json`)
 
 ### Function Details
 
