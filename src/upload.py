@@ -5,10 +5,13 @@ import errno
 import auth
 import http
 import http.client
+from dotenv import load_dotenv
+
+load_dotenv("../config.env")
 
 onlyProfilesIds = []
-API_HOSTNAME = os.environ.get('API_HOSTNAME')
-ONCOSHOT_ORGANISATION = os.environ.get('ONCOSHOT_ORGANISATION')
+API_HOSTNAME = os.getenv('API_HOSTNAME')
+ONCOSHOT_ORGANISATION = os.getenv('ONCOSHOT_ORGANISATION')
 
 def retrieveFile():
     try:
