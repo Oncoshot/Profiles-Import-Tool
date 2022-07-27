@@ -7,7 +7,7 @@ import http
 import http.client
 from dotenv import load_dotenv
 
-load_dotenv("../config.env")
+load_dotenv("../config.env example")
 
 onlyProfilesIds = []
 API_HOSTNAME = os.getenv('API_HOSTNAME')
