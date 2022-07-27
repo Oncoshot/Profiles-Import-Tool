@@ -3,7 +3,7 @@ import sys
 import hashlib
 from dotenv import load_dotenv
 
-load_dotenv("../config.env example")
+load_dotenv("../config.env")
 
 # run this file from the command line with the command: `python deidentify.py patientID`, where patientID is the patient identifier
 

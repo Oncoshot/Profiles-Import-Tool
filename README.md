@@ -18,6 +18,7 @@ To run the tool, take the following steps
     * AUTH0_URL = // Location to authenticate, typically https://auth.oncoshot.com/oauth/token
     * ONCOSHOT_ORGANISATION= // Your organisation name on Oncoshot
     * API_HOSTNAME= // Host name of the API, typically api.oncoshot.com
+    * SALT= // A secret string associated with your organization, used in the de-identification of patient IDs
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
     
 To run the tool in JavaScript,
