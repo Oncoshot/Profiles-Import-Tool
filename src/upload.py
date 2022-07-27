@@ -2,6 +2,8 @@ import json
 import os
 import sys
 import errno
+import uuid
+
 import auth
 import http
 import http.client
@@ -55,7 +57,8 @@ def uploadFile(results):
         'Content-Type': 'application/json-patch+json',
         'authorization': 'Bearer ' + token
     }
-    log_file = "../logs/" + date.today().strftime("%d-%m-%Y") + "-upload-log.txt"
+
+    log_file = "../logs/" + date.today().strftime("%d-%m-%Y") + "-" + uuid.uuid4().__str__() + "-upload-log.txt"
 
     with open(log_file, 'w') as f:
         f.write("")
