@@ -5,7 +5,8 @@
   "main": "src/upload.js",
   "scripts": {
     "upload": "env-cmd -f config.env node src/upload.js",
-    "delete": "env-cmd -f config.env node src/delete.js"
+    "delete": "env-cmd -f config.env node src/delete.js",
+    "restructure": "env-cmd -f config.env node src/restructure.js"
   },
   "repository": {
     "type": "git",
