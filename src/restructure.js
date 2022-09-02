@@ -82,7 +82,7 @@ function deleteProfiles() {
                       }
                     });
 
-                    if ([201, 204].includes(res.statusCode)) {
+                    if ([200].includes(res.statusCode)) {
                         successCount++;
                     } else {
                         failureCount++;
