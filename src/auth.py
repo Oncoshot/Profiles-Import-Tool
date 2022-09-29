@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 
 # load environment variables from config.env example file
-load_dotenv("../config.env")
+load_dotenv("config.env")
 
 AUTH0_CLIENT_ID = os.getenv("AUTH0_CLIENT_ID")
 AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
