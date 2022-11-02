@@ -52,8 +52,7 @@ function deleteProfiles() {
         for (let i = 0; i < results.length; i++) {
             await new Promise(async (resolve, reject) => {
                 // Set id
-                const id = results[i].id
-                delete results[i]['id']
+                const id = results[i].id || results[i].Id
 
                 const data = JSON.stringify(results[i])
 
