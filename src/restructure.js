@@ -6,7 +6,7 @@ const organizationId = process.env.ONCOSHOT_ORGANISATION
 const API_HOSTNAME = process.env.API_HOSTNAME
 let results;
 
-// use it, to delete specific items
+// use it, to restructure specific items
 const onlyProfilesIds = []
 
 function retrieveFile() {
@@ -97,7 +97,7 @@ function deleteProfiles() {
                 })
 
                 req.on('end', () => {
-                    console.log(`${id} delete complete`)
+                    console.log(`${id} restructure complete`)
                 })
 
                 req.write(data)
@@ -105,21 +105,21 @@ function deleteProfiles() {
             })
         }
 
-        console.log(`\nDelete complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`)
+        console.log(`\nRestructure complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`)
 
-        log += `Delete complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`
+        log += `Restructure complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`
 
         // Write Log to file
-        fs.writeFile(`./logs/${Date.now()}-delete-log.txt`, log, "utf8", (res, err) => {
+        fs.writeFile(`./logs/${Date.now()}-restructure-log.txt`, log, "utf8", (res, err) => {
             if (err) {
                 console.log(err)
             }
         })
     })
 }
-console.log("This tool deletes the formatted JSON file to the Oncoshot API.\n")
+console.log("This tool restructures the formatted JSON file to the Oncoshot API.\n")
 console.log("Guide to statusCodes:")
-console.log("204: Success, updated existing profile")
+console.log("200: Success, restructured existing profile")
 console.log("401: Failure, authentication failed")
 console.log("403: Failure, no access to organisation")
 console.log("422: Failure, data is wrongly formatted\n")
