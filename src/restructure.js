@@ -18,7 +18,7 @@ function retrieveFile() {
         let read = fs.readFileSync(inputFileName)
         results = JSON.parse(read)
         console.log(`Profiles to restructure : ${results.length}`)
-        deleteProfiles()
+        restructureProfiles()
     } catch (err) {
         if (err.code == "ENOENT") {
             console.error(inputFileName + " is not valid json file location")
@@ -31,7 +31,7 @@ function retrieveFile() {
 }
 
 
-function deleteProfiles() {
+function restructureProfiles() {
     authenticate().then(async (token, err) => {
         let log = ""
         if (!token || err) {
