@@ -4,34 +4,18 @@ const fs = require('fs')
 const { authenticate } = require('./auth.js');
 const organizationId = process.env.ONCOSHOT_ORGANISATION
 const API_HOSTNAME = process.env.API_HOSTNAME
-let results;
 
 // use it, to re-upload specific items
 const onlyProfilesIds = []
 
-function retrieveFile() {
-    try {
-        if (!process.argv[2]) {
-            throw new Error("No file input")
-        }
-        let inputFileName = process.argv[2]
-        let read = fs.readFileSync(inputFileName)
-        results = JSON.parse(read)
-        console.log(`Profiles to upload : ${results.length}`)
-        uploadProfiles()
-    } catch (err) {
-        if (err.code == "ENOENT") {
-            console.error(inputFileName + " is not valid json file location")
-            return
-        } else {
-            console.error(err)
-            return
-        }
-    }
+function retrieveFile(inputFileName) {
+    let read = fs.readFileSync(inputFileName)
+    results = JSON.parse(read)
+    return results
 }
 
 
-function uploadProfiles() {
+function uploadProfiles(profiles, command) {
     authenticate().then(async (token, err) => {
         let log = ""
         if (!token || err) {
@@ -45,20 +29,20 @@ function uploadProfiles() {
         let failureCount = 0
 
         if (onlyProfilesIds.length) {
-          results = results.filter(item => onlyProfilesIds.includes(item.id))
+          profiles = profiles.filter(item => onlyProfilesIds.includes(item.id))
         }
 
         // Push each entry
-        for (let i = 0; i < results.length; i++) {
+        for (let i = 0; i < profiles.length; i++) {
             await new Promise(async (resolve, reject) => {
                 // Set id
-                const id = results[i].id || results[i].Id
+                const id = profiles[i].id || profiles[i].Id
 
-                const data = JSON.stringify(results[i])
+                const data = JSON.stringify(profiles[i])
 
                 const options = {
                     hostname: API_HOSTNAME,
-                    path: `/api/v1/organizations/${organizationId}/profiles/${id}/import`,
+                    path: `/api/v1/organizations/${organizationId}/profiles/${id}/${command}`,
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -116,6 +100,7 @@ function uploadProfiles() {
         })
     })
 }
+
 console.log("This tool uploads the formatted JSON file to the Oncoshot API.\n")
 console.log("Guide to statusCodes:")
 console.log("201: Success, created new profile")
@@ -123,4 +108,34 @@ console.log("204: Success, updated existing profile")
 console.log("401: Failure, authentication failed")
 console.log("403: Failure, no access to organisation")
 console.log("422: Failure, data is wrongly formatted\n")
-retrieveFile()
+
+
+if (!process.argv[2]) {
+    throw new Error("No file input")
+}
+let inputFileName = process.argv[2]
+
+if (!process.argv[3]) {
+    throw new Error("No command input")
+}
+let command = process.argv[3]
+
+if(command!='import' && command!='merge') {
+    throw new Error("Wrong command: " + command)
+}
+
+try {
+    profiles = retrieveFile(inputFileName)
+    console.log(`Profiles to upload : ${profiles.length}`)
+    
+    uploadProfiles(profiles, command)
+} catch (err) {
+    if (err.code == "ENOENT") {
+        console.error(inputFileName + " is not valid json file location")
+        return
+    } else {
+        console.error(err)
+        return
+    }
+}    
+
