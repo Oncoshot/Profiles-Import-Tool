@@ -1,44 +1,110 @@
 [
     {
-        "id": "30",
-        "gender_Unstructured": [
-            "Female"
-        ],
-        "diagnoses_Cancer_Unstructured": [
-            "Non-melanoma skin"
-        ],
-        "cancerStage_Unstructured": [
-            "Stage NA"
-        ],
-        "dob_Unstructured": [
-            "1925"
-        ],
+        "id": "sp001",
         "location_Unstructured": [
             "Singapore"
         ],
+        "dob_Unstructured": [
+            "1965"
+        ],
+        "gender_Unstructured": [
+            "Female"
+        ],
+        "dateOfDiagnosis_Unstructured": [
+            "2020 Mar"
+        ],
+        "diagnoses_Unstructured": [
+            "Breast Cancer",
+            "Diabetes Type II"
+        ],
+        "cancerStage_Unstructured": [
+            "Stage IV"
+        ],
+        "medication_Unstructured": [
+            "Leuprorelin",
+            "Olaparib"
+        ],
+        "metastaticSite_Unstructured": [
+            "Lung"
+        ],
+        "dateOfSequencing_Unstructured": [
+            "2024 Jan"
+        ],
+        "mutations_Unstructured": [
+            "EGFR: Q787Q",
+            "BRCA1: Wildtype",
+            "BRCA2: N1742",
+            "KRAS"
+        ],
+        "biomarkers_Unstructured": [
+            "ER Positive",
+            "Her2 Negative",
+            "PR Positive"
+        ],
+        "ecog_Unstructured": [
+            "1"
+        ],
+        "deceased_Unstructured": [
+            "Alive"
+        ],
+        "oncologist_Unstructured": [
+            "Alvin, Tan"
+        ],
+        "notes": "",
         "firstName": "Imported",
         "lastName": "Profile",
-        "referenceNo": "30"
+        "referenceNo": "sp001"
     },
     {
-        "id": "31",
-        "gender_Unstructured": [
-            "Female"
-        ],
-        "diagnoses_Cancer_Unstructured": [
-            "Thyroid"
-        ],
-        "cancerStage_Unstructured": [
-            "Stage I"
-        ],
-        "dob_Unstructured": [
-            "1976"
-        ],
+        "id": "sp002",
         "location_Unstructured": [
             "Singapore"
         ],
+        "dob_Unstructured": [
+            "1985"
+        ],
+        "gender_Unstructured": [
+            "Male"
+        ],
+        "dateOfDiagnosis_Unstructured": [
+            "2022 May"
+        ],
+        "diagnoses_Unstructured": [
+            "Liver Cancer",
+            "Hepatitis B"
+        ],
+        "cancerStage_Unstructured": [
+            "Stage II"
+        ],
+        "medication_Unstructured": [
+            "Pembrolizumab",
+            "Prednisone"
+        ],
+        "metastaticSite_Unstructured": [],
+        "dateOfSequencing_Unstructured": [
+            "2023 Dec"
+        ],
+        "mutations_Unstructured": [
+            "TP53: S241fs",
+            "CTNNB1: Wildtype",
+            "IDH1: Wildtype",
+            "IDH2: Wildtype"
+        ],
+        "biomarkers_Unstructured": [
+            "PD-L1 < 1%"
+        ],
+        "ecog_Unstructured": [
+            "0"
+        ],
+        "deceased_Unstructured": [
+            "Alive"
+        ],
+        "oncologist_Unstructured": [
+            "Tanya, Anderson"
+        ],
+        "notes": "",
         "firstName": "Imported",
         "lastName": "Profile",
-        "referenceNo": "31"
+        "referenceNo": "sp002"
     }
 ]

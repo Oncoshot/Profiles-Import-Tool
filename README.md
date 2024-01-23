@@ -1,7 +1,7 @@
 # Profiles-Import-Tool
 
 ## Upload Tool
-This tool is an example how to import profiles to Oncoshot via its API
+This tool is used when you want to import profiles to Oncoshot via IMPORT API (PUT: "/api/v1/organizations/{organizationId}/profiles/{id}/import"). You can use this tool if you want to upload new profiles or add new profiles or replace the specific profiles with updated information.
 
 This tool is implemented in both node.js and python. Implementation details for both languages are given below. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
 
@@ -22,7 +22,7 @@ To run the tool, take the following steps
 WARNING: Do not share the auth.env file or secret key in a public forum or commit it to a public git repo
     
 To run the tool in JavaScript,
-1. Run the commannd, `npm run upload <Location of File>` to start the tool (eg. `npm run upload data/samples.json`)
+1. Run the commannd, `npm run upload <Location of File> import` to start the tool (eg. `npm run upload data/samples.json import`)
 2. Logs will be printed to the console and saved in a .txt file in the logs folder
 
 To run the tool in Python,
@@ -31,10 +31,10 @@ To run the tool in Python,
 
 ### Function Details
 
-1. `src/auth.js`/`src/auth.py`
+1. `src/auth.js` or `src/auth.py`
     This functions request for a Bearer token from Auth0 with the given authentication details via OAuth2.0
     The Bearer token is passed on to other functions that require authentication
-2. `src/upload.js`/`src/upload.py`
+2. `src/upload.js` or `src/upload.py`
     This is the function that makes the request to HTTPS.
     The function accepts a JSON data file and makes PUT request to the OS API with the Bearer token.
     The endpoint being used is `api.oncodevel.com/api/v1/organizations/{organizationId}/profiles`
@@ -87,9 +87,23 @@ http://www.cbioportal.org/study/summary?id=msk_impact_2017
 1. `mskcc-dataset/main.py`
 The python script uses pandas dataframes to format, rename and calculate data.
 
+# Profile-Merge-Tool
+## Merge Tool
+This tool is used when you want to merge profile information in Oncoshot via MERGE API (PUT: "/api/v1/organizations/{organizationId}/profiles/{id}/merge"). You can use this tool if you want to merge additional information into specific data fields of existing profiles or add new profiles. However, please take note that this tool is not used to replace information in profiles.
+
+This tool is written in node.js. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
+
+### Getting Started
+To run the tool, take the following steps
+1. Prepare a Json file to include profiles with specific data fields that have additional information need to be merged.
+2. This tool is using the same Javascript file upload.js as the "Upload Tool" mentioned above.
+3. Run the commannd, `npm run upload <Location of Json file> merge` to start the tool (eg. `npm run upload data/samples.json merge`)
+4. Logs will be printed to the console and saved in a .txt file in the logs folder
+
+
 # Profile-Delete-Tool
 ## Delete Tool
-This tool is an example how to delete profiles from Oncoshot via its DELETE API
+This tool used when you want to delete profiles from Oncoshot via its DELETE API (DELETE: "/api/v1/organizations/{organizationId}/profiles/{profileId}")
 This tool is written in node.js. The API documentation is available on https://apisite.oncoshot.com/swagger/index.html
 
 ### Getting Started
@@ -97,4 +111,3 @@ To run the tool, take the following steps
 1. Prepare a Json file to include ONLY profiles need to be deleted.
 2. Run the commannd, `npm run delete <Location of Json file>` to start the tool (eg. `npm run delete data/profiles_to_be_deleted_samples.json`)
 3. Logs will be printed to the console and saved in a .txt file in the logs folder
-
