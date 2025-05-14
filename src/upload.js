@@ -65,13 +65,23 @@ function uploadProfiles(profiles, command) {
                       }
                     });
 
-                    if ([201, 204].includes(res.statusCode)) {
-                        successCount++;
-                    } else {
+                if ([201, 204].includes(res.statusCode)) {
+                    successCount++;
+                    resolve();
+                } else if (res.statusCode === 401) {
+                    authenticate().then(newToken => {
+                        console.log('Re-authenticating due to 401 error.');
+                        makeRequest(newToken); // Retry request with new token
+                    }).catch(authErr => {
+                        console.error('Re-authentication failed:', authErr);
                         failureCount++;
-                    }
-                    resolve()
-                })
+                        reject(authErr);
+                    });
+                } else {
+                    failureCount++;
+                    resolve();
+                }
+            })
 
                 req.on('error', error => {
                     console.error(error)
