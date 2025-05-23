@@ -10,104 +10,109 @@ const onlyProfilesIds = []
 
 function retrieveFile(inputFileName) {
     let read = fs.readFileSync(inputFileName)
-    results = JSON.parse(read)
+    const results = JSON.parse(read)
     return results
 }
 
-
 function uploadProfiles(profiles, command) {
-    authenticate().then(async (token, err) => {
-        let log = ""
-        if (!token || err) {
-            throw new Error('Authentication Failure')
-        }
+    let token = null;
+    authenticate().then(async (initialToken) => {
+        
+        if (!initialToken) throw new Error("Authentication Failure")
 
+        token = initialToken;
         console.log("Authentication Successful")
 
-
+        let log = ""
         let successCount = 0
         let failureCount = 0
 
         if (onlyProfilesIds.length) {
-          profiles = profiles.filter(item => onlyProfilesIds.includes(item.id))
+            profiles = profiles.filter(item => onlyProfilesIds.includes(item.id))
         }
 
         // Push each entry
         for (let i = 0; i < profiles.length; i++) {
-            await new Promise(async (resolve, reject) => {
-                // Set id
-                const id = profiles[i].id || profiles[i].Id
+            const profile = profiles[i]
+            const id = profile.id || profile.Id
+            const data = JSON.stringify(profile)
 
-                const data = JSON.stringify(profiles[i])
-
-                const options = {
-                    hostname: API_HOSTNAME,
-                    path: `/api/v1/organizations/${organizationId}/profiles/${id}/${command}`,
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'authorization': `Bearer ${token}`
+            // Define request function with 401 reauth + retry
+            const sendRequest = (retry = false) => {
+                return new Promise((resolve, reject) => {
+                    
+                    const options = {
+                        hostname: API_HOSTNAME,
+                        path: `/api/v1/organizations/${organizationId}/profiles/${id}/${command}`,
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'authorization': `Bearer ${token}`
+                        }
                     }
-                }
 
-                const req = https.request(options, res => {
-                    log += `${i} Profile ${id}: statusCode: ${res.statusCode}\n`
-                    console.log(`${i} Profile ${id}: statusCode: ${res.statusCode}`)
+                    const req = https.request(options, res => {
+                        console.log(`${i} Profile ${id}: statusCode: ${res.statusCode}${retry ? ' (retry)' : ''}`)
+                        log += `${i} Profile ${id}: statusCode: ${res.statusCode}${retry ? ' (retry)' : ''}\n`
 
-                    res.on("data", function(chunk) {
-                      if (res.statusCode === 422) {
-                        log += chunk + '\n'
-                        fs.writeFile(`./logs/${id}_failure-profile.json`, data, "utf8", (res, err) => {
-                          if (err) {
-                            console.log(err)
-                          }
-                        })
-                      }
+                        let responseBody = ""
+                        res.on("data", chunk => {
+                            responseBody += chunk;
+                            if (res.statusCode === 422) {
+                                log += chunk + '\n'
+                                fs.writeFile(`./logs/${id}_failure-profile.json`, data, "utf8", err => {
+                                    if (err) console.log(err)
+                                })
+                            }
+                        });
+
+                        res.on("end", async () => {
+                            if ([201, 204].includes(res.statusCode)) {
+                                successCount++;
+                                resolve();
+                            } else if (res.statusCode === 401 && !retry) {
+                                console.log(`401 for profile ${id}. Reauthenticating...`);
+                                try {
+                                    token = await authenticate(); // get new token
+                                    console.log("Reauthentication successful. Retrying...");
+                                    await sendRequest(true); // retry same profile
+                                    resolve();
+                                } catch (authErr) {
+                                    console.error("Reauthentication failed:", authErr);
+                                    failureCount++;
+                                    resolve();
+                                }
+                            } else {
+                                failureCount++;
+                                resolve();
+                            }
+                        });
                     });
 
-                if ([201, 204].includes(res.statusCode)) {
-                    successCount++;
-                    resolve();
-                } else if (res.statusCode === 401) {
-                    authenticate().then(newToken => {
-                        console.log('Re-authenticating due to 401 error.');
-                        makeRequest(newToken); // Retry request with new token
-                    }).catch(authErr => {
-                        console.error('Re-authentication failed:', authErr);
+                    req.on("error", error => {
+                        console.error(error);
+                        log += error + "\n";
                         failureCount++;
-                        reject(authErr);
+                        resolve();
                     });
-                } else {
-                    failureCount++;
-                    resolve();
-                }
-            })
 
-                req.on('error', error => {
-                    console.error(error)
-                    log += error + '\n'
-                    reject(err)
-                })
+                    req.write(data);
+                    req.end();
+                });
+            };
 
-                req.on('end', () => {
-                    console.log(`${id} upload complete`)
-                })
-
-                req.write(data)
-                req.end()
-            })
+            await sendRequest();
         }
 
-        console.log(`\nUpload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`)
+        console.log(`\nUpload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}`);
+        log += `Upload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`;
 
-        log += `Upload complete \nSuccessful: ${successCount} \nFailed: ${failureCount}\n`
-
-        // Write Log to file
-        fs.writeFile(`./logs/${Date.now()}-upload-log.txt`, log, "utf8", (res, err) => {
-            if (err) {
-                console.log(err)
-            }
-        })
+        fs.writeFile(`./logs/${Date.now()}-upload-log.txt`, log, "utf8", err => {
+            if (err) console.log(err);
+        });
+    }).catch(err => {
+        console.error("Authentication Failure:", err);
+        throw new Error("Authentication Failure");
     })
 }
 
@@ -119,7 +124,6 @@ console.log("401: Failure, authentication failed")
 console.log("403: Failure, no access to organisation")
 console.log("422: Failure, data is wrongly formatted\n")
 
-
 if (!process.argv[2]) {
     throw new Error("No file input")
 }
@@ -130,22 +134,19 @@ if (!process.argv[3]) {
 }
 let command = process.argv[3]
 
-if(command!='import' && command!='merge') {
+if (command !== 'import' && command !== 'merge') {
     throw new Error("Wrong command: " + command)
 }
 
 try {
     profiles = retrieveFile(inputFileName)
     console.log(`Profiles to upload : ${profiles.length}`)
-    
     uploadProfiles(profiles, command)
 } catch (err) {
-    if (err.code == "ENOENT") {
-        console.error(inputFileName + " is not valid json file location")
-        return
+    if (err.code === "ENOENT") {
+        console.error(inputFileName + " is not valid JSON file location")
     } else {
         console.error(err)
-        return
     }
 }    
 
