@@ -73,6 +73,13 @@ def uploadFile(results, log_file_path, token):
 
         res = conn.getresponse()
 
+        if res.status == 401:
+            print('Received 401 Unauthorized. Re-authenticating...')
+            token = authenticate()  # Re-authenticate
+            headers['Authorization'] = f'Bearer {token}'
+            conn.request('PUT', url, headers=headers, body=data)
+            res = conn.getresponse()
+
         with open(log_file_path, 'a') as f:
             f.write("%d Profile %s: statusCode: %d\n" % (i, id, res.status))
 
